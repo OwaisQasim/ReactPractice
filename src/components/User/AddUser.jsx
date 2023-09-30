@@ -7,16 +7,17 @@ export default function AddUser() {
 
     const [username, setUsername] = useState('')
     const [age, setAge] = useState('')
+    const [errorMessage, setErrorMessage] = useState(false)
 
     const submitHandler = (evnt) => {
         evnt.preventDefault()
         if (!username || !age) {
-            return
+            setErrorMessage(true)
         }
         if (+age < 1) {
-            return
+            setErrorMessage(true)
         }
-        console.log(username, age)
+
         setUsername('')
         setAge('')
     }
