@@ -6,7 +6,7 @@ import Button from './Button'
 export default function ErrorModal(props) {
     return (
         <div>
-            <div className={classes.backdrop} />
+            <div onClick={props.clearError} className={classes.backdrop} />
             <Card className={classes.modal}>
                 <header className={classes.header}>
                     <h2>{props.title}</h2>
@@ -15,7 +15,7 @@ export default function ErrorModal(props) {
                     <p>{props.message}</p>
                 </div>
                 <footer className={classes.actions}>
-                    <Button>Okay</Button>
+                    <Button onClick={props.clearError}>Okay</Button>
                 </footer>
             </Card>
         </div>

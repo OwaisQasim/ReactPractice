@@ -13,10 +13,11 @@ export default function AddUser(props) {
 
     const submitHandler = (evnt) => {
         evnt.preventDefault()
-        if (username.trim().length === 0 || age.trim().length === 0) {
+        if (username.trim().length === 0) {
             setError({ title: 'Invalid Username', message: 'Please Enter a valid username.' })
+            return
         }
-        if (+age < 1) {
+        if ((+age < 1 || +age === 0)) {
             setError({ title: 'Invalid Age', message: 'Please enter a valid age.' })
         }
 
@@ -41,9 +42,13 @@ export default function AddUser(props) {
         setGender(evnt.target.value)
     }
 
+    const errorHandler = () => {
+        setError(null)
+    }
+
     return (
         <div>
-            {error && <ErrorModal title='An Error occured!' message='Something went wrong.' />}
+            {error && <ErrorModal clearError={errorHandler} title={error.title} message={error.message} />}
 
             <Card className={classes.input}>
                 <form onSubmit={submitHandler}>

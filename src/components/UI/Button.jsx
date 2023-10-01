@@ -5,7 +5,7 @@ export default function Button(props) {
     return (
         <button
             className={classes.button}
-            type={props.type || 'button'}
+            type={props.type || 'button' || 'btn'}
             onClick={props.onClick}
         >
             {props.children}
