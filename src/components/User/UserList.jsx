@@ -8,10 +8,12 @@ export default function UserList(props) {
         <Card className={classes.users}>
             <ul>{props.users.map(user => (
                 <li key={user.id}>
-                    {user.username} {user.age} years old
+                    {user.username}, {user.gender}, aged {user.age} (years)
                 </li>
             ))}
             </ul>
         </Card>
     )
 }
+
+

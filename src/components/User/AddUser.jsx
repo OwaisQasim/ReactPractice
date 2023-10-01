@@ -7,6 +7,7 @@ export default function AddUser(props) {
 
     const [username, setUsername] = useState('')
     const [age, setAge] = useState('')
+    const [gender, setGender] = useState('')
 
     const submitHandler = (evnt) => {
         evnt.preventDefault()
@@ -16,9 +17,14 @@ export default function AddUser(props) {
         if (+age < 1) {
             return
         }
-        props.onAddUser(username, age)
+
+        if (gender !== 'male' && gender !== 'female') {
+            return;
+        }
+        props.onAddUser(username, age, gender)
         setUsername('')
         setAge('')
+        setGender('male')
     }
 
     const usernameChangeHandler = (evnt) => {
@@ -29,6 +35,10 @@ export default function AddUser(props) {
         setAge(evnt.target.value)
     }
 
+    const genderChangeHandler = (evnt) => {
+        setGender(evnt.target.value)
+    }
+
     return (
         <Card className={classes.input}>
             <form onSubmit={submitHandler}>
@@ -36,6 +46,10 @@ export default function AddUser(props) {
                 <input value={username} onChange={usernameChangeHandler} id='username' type="text" />
                 <label htmlFor="age">Age (years): </label>
                 <input value={age} type="number" id="age" onChange={ageChangeHandler} />
+                <select value={gender} id='gender' onChange={genderChangeHandler}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
                 <Button type='submit'>Add User</Button>
             </form>
         </Card>

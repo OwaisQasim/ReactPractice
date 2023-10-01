@@ -20,6 +20,15 @@
     margin-bottom: 0.5rem;
 }
 
+.input select {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+    border-radius: 2px;
+    width: 6.3rem;
+}
+
 .input input:focus {
     outline: none;
 }
