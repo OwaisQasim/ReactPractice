@@ -3,21 +3,20 @@ import Card from '../UI/Card'
 import classes from './AddUser.module.css'
 import Button from '../UI/Button'
 
-export default function AddUser() {
+export default function AddUser(props) {
 
     const [username, setUsername] = useState('')
     const [age, setAge] = useState('')
-    const [errorMessage, setErrorMessage] = useState(false)
 
     const submitHandler = (evnt) => {
         evnt.preventDefault()
-        if (!username || !age) {
-            setErrorMessage(true)
+        if (username.trim().length === 0 || age.trim().length === 0) {
+            return
         }
         if (+age < 1) {
-            setErrorMessage(true)
+            return
         }
-
+        props.onAddUser(username, age)
         setUsername('')
         setAge('')
     }
