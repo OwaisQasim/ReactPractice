@@ -3,6 +3,7 @@ import Card from '../UI/Card'
 import classes from './AddUser.module.css'
 import Button from '../UI/Button'
 import ErrorModal from '../UI/ErrorModal'
+import Wrapper from '../../helpers/Wrapper'
 
 export default function AddUser(props) {
 
@@ -47,7 +48,7 @@ export default function AddUser(props) {
     }
 
     return (
-        <div>
+        <Wrapper>
             {error && <ErrorModal clearError={errorHandler} title={error.title} message={error.message} />}
 
             <Card className={classes.input}>
@@ -63,6 +64,6 @@ export default function AddUser(props) {
                     <Button type='submit'>Add User</Button>
                 </form>
             </Card>
-        </div>
+        </Wrapper>
     )
 }
