@@ -1,43 +1,42 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Card from '../UI/Card'
 import classes from './AddUser.module.css'
 import Button from '../UI/Button'
 import ErrorModal from '../UI/ErrorModal'
 import Wrapper from '../../helpers/Wrapper'
 
+
 export default function AddUser(props) {
 
-    const [username, setUsername] = useState('')
-    const [age, setAge] = useState('')
+    const nameInputRef = useRef()
+    const ageInputRef = useRef()
+
+
     const [gender, setGender] = useState('male')
     const [error, setError] = useState()
 
     const submitHandler = (evnt) => {
         evnt.preventDefault()
-        if (username.trim().length === 0) {
+        const enteredName = nameInputRef.current.value
+        const enteredage = ageInputRef.current.value
+        if (enteredName.trim().length === 0) {
             setError({ title: 'Invalid Username', message: 'Please Enter a valid username.' })
             return
         }
-        if ((+age < 1 || +age === 0)) {
+        if ((+enteredage < 1 || +age === 0)) {
             setError({ title: 'Invalid Age', message: 'Please enter a valid age.' })
         }
 
         if (gender !== 'male' && gender !== 'female') {
             return;
         }
-        props.onAddUser(username, age, gender)
-        setUsername('')
-        setAge('')
+        props.onAddUser(enteredName, enteredage, gender)
+
         setGender('male')
+        nameInputRef.current.value = ''
+        ageInputRef.current.value = ''
     }
 
-    const usernameChangeHandler = (evnt) => {
-        setUsername(evnt.target.value)
-    }
-
-    const ageChangeHandler = (evnt) => {
-        setAge(evnt.target.value)
-    }
 
     const genderChangeHandler = (evnt) => {
         setGender(evnt.target.value)
@@ -54,9 +53,18 @@ export default function AddUser(props) {
             <Card className={classes.input}>
                 <form onSubmit={submitHandler}>
                     <label htmlFor="username">Username: </label>
-                    <input value={username} onChange={usernameChangeHandler} id='username' type="text" />
+                    <input
+
+                        id='username'
+                        type="text"
+                        ref={nameInputRef}
+                    />
                     <label htmlFor="age">Age (years): </label>
-                    <input value={age} type="number" id="age" onChange={ageChangeHandler} />
+                    <input
+                        type="number"
+                        id="age"
+                        ref={ageInputRef}
+                    />
                     <select value={gender} id='gender' onChange={genderChangeHandler}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
